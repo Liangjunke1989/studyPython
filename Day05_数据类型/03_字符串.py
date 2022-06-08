@@ -48,6 +48,7 @@ print("------------5、检索字符串--------------")
     find()
     index()
     字符串的判断
+    
     startswith()
     endswith()
 '''
