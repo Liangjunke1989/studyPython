@@ -2,6 +2,8 @@
 
 # 单行注释
 print("hello world")
+
+# 多行注释
 """
  第一行注释
  第二行注释
@@ -9,4 +11,4 @@ print("hello world")
 """
 print("hello python")
 
-# print("ljk")8
+
