@@ -22,6 +22,6 @@
         值类型，不可变类型（Number数字类型、String（字符串）、Tuple（元组））
         引用类型，可变类型（List列表、Dictionary(字典)、Set（集合））
 """
-'''
+"""
     6.[]->List，List——>Set
-'''
+"""
