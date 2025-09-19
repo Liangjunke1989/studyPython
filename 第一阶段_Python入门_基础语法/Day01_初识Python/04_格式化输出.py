@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2025/9/19 10:14
+# @File    : 04_格式化输出.py
+# @Software: PyCharm
+
 # 格式化输出
 name = 'ljk'
 age = 33
@@ -11,7 +16,7 @@ print("我的体重为:%.2f公斤" % weight)
 print("我的学号是:%03d" % stu_id)  # 以0补全
 # 写法二：
 print('----------------写法二--------------------')
-print('%s的年龄为:%d岁,体重为:%.2f公斤,学号是:%06d' % (name, age, weight, stu_id))
+print('%s的年龄为:%d岁,体重为:%.2f公斤,学号是:%06d' % (name, age, weight, stu_id))#%06d:以0补全,占位符
 print('%s明年的年龄为:%d岁' % (name, age + 1))
 # 写法三：
 print('----------------写法三--------------------')
