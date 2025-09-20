@@ -29,3 +29,6 @@ while i < 3:
         print('我是koko')
         j += 1
     i += 1
+print('完成计数器的操作')
+
+
