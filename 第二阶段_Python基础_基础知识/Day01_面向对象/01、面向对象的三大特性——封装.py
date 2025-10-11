@@ -78,40 +78,45 @@ print("---------------------------5、魔术方法------------------------------
         __sub__()：对象相减
         __mul__()：对象相乘        
 """
+print("---------------------------6、测试--------------------------------------")
+print("-------------------01、魔术方法-常用使用01--------------------------")
 class Student(object):
     def __init__(self,name,age):
         self.name=name
         self.age=age
         print('构造方法调用了')
+    # def __del__(self):
+    #     print('析构方法调用了')
     def __str__(self):
         return f'{self.name}已经{self.age}岁了'
-    def __len__(self):
-        return 10
-    def __getitem__(self, item):
-        return item
-    def __setitem__(self, key, value):
-        print(f'索引{key}，已经{value}岁了')
-    def __delitem__(self, key):
-        print(f'索引{key}已经删除了')
+    # def __len__(self):
+    #     return 10
+    # def __getitem__(self, item):
+    #     return item
+    # def __setitem__(self, key, value):
+    #     print(f'索引{key}，已经{value}岁了')
+    # def __delitem__(self, key):
+    #     print(f'索引{key}已经删除了')
     def __call__(self, *args, **kwargs): # 对象调用方法
         print(f'{self.name}已经{self.age}岁了，已经call调用了')
         return print(f"{self},call函数调用成功")
-    def __add__(self, other):
-        return self.age+other
-    def __sub__(self, other):
-        return self.age-other
-    def __mul__(self, other):
-        return self.age*other
-stu1=Student('ljk',33)
-print(stu1)
-print(len(stu1))
-print(stu1[1])
-stu1[1]=10
-del stu1[1]
-stu1() # 调用对象方法
-print(stu1+1)
-print(stu1-1)
-print(stu1*2)
+    # def __add__(self, other):
+    #     return self.age+other
+    # def __sub__(self, other):
+    #     return self.age-other
+    # def __mul__(self, other):
+    #     return self.age*other
+# stu1=Student('ljk',33)
+# print(stu1)
+# print(len(stu1))
+# print(stu1[1])
+# stu1[1]=10
+# del stu1[1]
+# stu1() # 调用对象方法
+# print(stu1+1)
+# print(stu1-1)
+# print(stu1*2)
+# del stu1 # 对象销毁,触发析构方法
 # print(stu1.__str__())
 # print(stu1.__len__())
 # print(stu1.__getitem__(1))
@@ -121,6 +126,9 @@ print(stu1*2)
 # print(stu1.__add__(1))
 # print(stu1.__sub__(1))
 # print(stu1.__mul__(2))
+stu=Student('ljk',33)
+stu()
+print("-------------------02、魔术方法-常用使用02--------------------------")
 
 
 
