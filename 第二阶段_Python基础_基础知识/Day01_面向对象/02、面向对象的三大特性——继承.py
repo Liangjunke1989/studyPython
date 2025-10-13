@@ -30,13 +30,18 @@ class Animal:
         print(f'动物可以叫！！！')
 
 class Dog(Animal):
+    """
+        super()：
+            super() 是Python内置函数，用于调用父类(超类)的方法
+            主要用于继承关系中，实现方法重写和扩展
+    """
     def __init__(self,name, age):
-        super().__init__(age, name)# 调用父类的构造方法
+        super().__init__(name, age)# 调用父类的构造方法
     def get_attr(self):
         print(f'{self.name}的年龄是{self.age}')# 公共属性
     def call(self):
         super().call()# 调用父类的方法
-        print(f'{self.name}汪汪叫！！！')
+        print(f'{self.age}岁的{self.name},汪汪叫！！！')
 Dog('旺财', 10).call() #实例化对象调用方法
 
 
@@ -45,7 +50,7 @@ print("--------------02、继承实例2_私有属性-----------------")
 class Person(Animal):
     def __init__(self,name, age,sex,id):
         super().__init__(name,age)# 调用父类的构造方法
-        self.sex=sex
+        self.sex=sex    # 重写
         self.id=id
     def get_attr(self):
         print(f'{self.name}的年龄是{self.age},性别是{self.sex}')# 公共属性
@@ -104,6 +109,10 @@ bird=Bird('小鸽子', 1)
 bird.call()
 print("--------------04、继承实例4_多继承-----------------")
 class Parrot(Bird, Person):
+    """
+        避免在多重继承中使用 super() 传递不同参数
+        建议显式调用具体父类的方法
+    """
     def __init__(self,name,age):
         # 显式调用父类构造函数，提供所需的参数
         Bird.__init__(self, name, age)
@@ -112,8 +121,64 @@ class Parrot(Bird, Person):
         super().call()
         Person.get_id(self)
         print(f'{self.name}可以学习人说话！！！')
+
 parrot=Parrot('小鹦鹉', 3)
 parrot.call()
+
+print("--------------05、继承实例4_重写-----------------")
+
+class Cat(Animal):
+    def __init__(self,name,age):
+        super().__init__(name,age)
+    def call(self):
+        super().call()
+        print(f'{self.name}喵喵喵！！！')
+cat1=Cat('小猫', 2)
+cat1.call()
+
+print("--------------05、继承实例4_逆变和协变-----------------")
+"""
+    协变(Covariance): 子类对象可以替代父类对象使用
+    逆变(Contravariance): 父类对象可以替代子类对象使用
+    不变(Invariance): 既不支持协变也不支持逆变
+"""
+print("---------------------------01、协变01-------------------------")
+class A:
+    def show(self, x: int) -> str:
+        return "A"
+class B(A):
+    def show(self, x: float) -> str:
+        return "B"
+b1=B()
+print(b1.show(1))
+print("---------------------------02、协变02-------------------------")
+# 协变: 子类对象可以替代父类对象使用
+def process_animal(animal: Animal):
+    animal.call()
+dog=Dog('旺财', 10)
+process_animal(dog) #   Dog是Animal的子类，协变允许这种替换
+bird=Bird('小鸽子1', 11)
+process_animal(bird)
+
+# 协变 - Sequence[Dog]可以当作Sequence[Animal]使用
+from typing import Sequence
+dogs: Sequence[Dog] = [Dog('旺财', 10)]
+animals: Sequence[Animal] = dogs  # 这是允许的
+
+print("---------------------------01、逆变01-------------------------")
+# 逆变: 父类对象可以替代子类对象使用
+from typing import Callable
+# 函数参数的逆变
+def feed_animal(animal: Animal) -> None:
+    print("Feeding animal")
+def feed_dog(dog: Dog) -> None:
+    print("Feeding dog")
+# 逆变 - Callable[..., Dog]可以当作Callable[..., Animal]使用
+handler: Callable[[Animal], None] = feed_animal # 逆变：能处理Animal的函数也能处理Dog
+handler(Dog("旺财22", 13)) # 正确
+# 逆变适用于输入位置：函数参数、setter参数等
+# 方向相反：如果Dog是Animal的子类型，那么Callable[[Animal], None]是Callable[[Dog], None]的子类型
+# 实际意义：能够处理更一般类型（Animal）的函数，也能处理更具体类型（Dog）的对象
 
 
 
