@@ -142,7 +142,7 @@ print("--------------05、继承实例4_逆变和协变-----------------")
     逆变(Contravariance): 父类对象可以替代子类对象使用
     不变(Invariance): 既不支持协变也不支持逆变
 """
-print("---------------------------01、协变01-------------------------")
+print("---------------------------00、原始-------------------------")
 class A:
     def show(self, x: int) -> str:
         return "A"
@@ -151,12 +151,12 @@ class B(A):
         return "B"
 b1=B()
 print(b1.show(1))
-print("---------------------------02、协变02-------------------------")
+print("---------------------------01、协变-------------------------")
 # 协变: 子类对象可以替代父类对象使用
-def process_animal(animal: Animal):
+def process_animal(animal: Animal): # 参数类型为Animal
     animal.call()
 dog=Dog('旺财', 10)
-process_animal(dog) #   Dog是Animal的子类，协变允许这种替换
+process_animal(dog) #   传值为子类(Dog是Animal的子类)，协变允许这种替换
 bird=Bird('小鸽子1', 11)
 process_animal(bird)
 
@@ -165,7 +165,7 @@ from typing import Sequence
 dogs: Sequence[Dog] = [Dog('旺财', 10)]
 animals: Sequence[Animal] = dogs  # 这是允许的
 
-print("---------------------------01、逆变01-------------------------")
+print("---------------------------02、逆变-------------------------")
 # 逆变: 父类对象可以替代子类对象使用
 from typing import Callable
 # 函数参数的逆变
@@ -174,11 +174,11 @@ def feed_animal(animal: Animal) -> None:
 def feed_dog(dog: Dog) -> None:
     print("Feeding dog")
 # 逆变 - Callable[..., Dog]可以当作Callable[..., Animal]使用
-handler: Callable[[Animal], None] = feed_animal # 逆变：能处理Animal的函数也能处理Dog
-handler(Dog("旺财22", 13)) # 正确
-# 逆变适用于输入位置：函数参数、setter参数等
-# 方向相反：如果Dog是Animal的子类型，那么Callable[[Animal], None]是Callable[[Dog], None]的子类型
-# 实际意义：能够处理更一般类型（Animal）的函数，也能处理更具体类型（Dog）的对象
+handler1: Callable[[Animal], None] = feed_animal # 逆变：能处理Animal的函数也能处理Dog
+handler2: Callable[[Dog], None] = feed_dog
+handler1(Dog("旺财22", 13)) # 正确,调用的是父类的方法
+handler2(Dog("旺财22", 13)) # 正确,调用的是子类的方法
+
 
 
 
