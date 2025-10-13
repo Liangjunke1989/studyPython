@@ -22,4 +22,13 @@ class MyIterator:
         value = self.data[self.index]
         self.index += 1
         return value
+myIterator = MyIterator([1, 2, 3, 4, 5])
+print(iter(myIterator))
+print(next(myIterator))
+print(next(myIterator))
+print(next(myIterator))
+print(next(myIterator))
+print(next(myIterator))
+print(iter(myIterator))
+
 
