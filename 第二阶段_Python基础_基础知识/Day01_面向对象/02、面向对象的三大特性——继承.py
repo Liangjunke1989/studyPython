@@ -49,10 +49,11 @@ class Person(Animal):
         self.id=id
     def get_attr(self):
         print(f'{self.name}的年龄是{self.age},性别是{self.sex}')# 公共属性
-    def call(self):
-        print(f'{self.name}哇哇哭！！！')
-    def __get_id(self):
+    def get_id(self):
         print(f'{self.name}的编号是{self.id}')
+    def call(self):
+        super().call()
+        print(f'{self.name}哇哇哭！！！')
 
 class Girl(Person):
     # 类常量定义
@@ -93,7 +94,7 @@ print(g2.get_sex())
 print("--------------03、继承实例3_私有方法-----------------")
 class Bird(Animal):
     def __init__(self,name,age):
-        super().__init__(name,age)
+        Animal.__init__(self,name,age)# 调用父类的构造方法
     def __fly(self):
         print(f'我叫{self.name}，年龄{self.age}岁了，可以飞了！！！')
     def call(self):
@@ -101,5 +102,18 @@ class Bird(Animal):
         self.__fly()
 bird=Bird('小鸽子', 1)
 bird.call()
+print("--------------04、继承实例4_多继承-----------------")
+class Parrot(Bird, Person):
+    def __init__(self,name,age):
+        # 显式调用父类构造函数，提供所需的参数
+        Bird.__init__(self, name, age)
+        Person.__init__(self, name, age, '未知', '1002')
+    def call(self):
+        super().call()
+        Person.get_id(self)
+        print(f'{self.name}可以学习人说话！！！')
+parrot=Parrot('小鹦鹉', 3)
+parrot.call()
+
 
 
