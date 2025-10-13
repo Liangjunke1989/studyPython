@@ -175,7 +175,7 @@ def feed_dog(dog: Dog) -> None:
     print("Feeding dog")
 # 逆变 - Callable[..., Dog]可以当作Callable[..., Animal]使用
 handler1: Callable[[Animal], None] = feed_animal # 逆变：能处理Animal的函数也能处理Dog
-handler2: Callable[[Dog], None] = feed_dog
+handler2: Callable[[Dog], None] = feed_dog # 逆变
 handler1(Dog("旺财22", 13)) # 正确,调用的是父类的方法
 handler2(Dog("旺财22", 13)) # 正确,调用的是子类的方法
 
